@@ -21,4 +21,4 @@ Instructions:
 
 Special Thanx:
 
-To [a eXifreXi](https://github.com/eXifreXi) for his awesome plugin eXiSoundVis was a learning treasure to me, helped me to understand the appliance of FFT Algorithm on Audio Frequencies visit his repository here https://github.com/eXifreXi/eXiSoundVis
+To [eXifreXi](https://github.com/eXifreXi) for his awesome plugin eXiSoundVis was a learning treasure to me, helped me to understand the appliance of FFT Algorithm on Audio Frequencies visit his repository here https://github.com/eXifreXi/eXiSoundVis
