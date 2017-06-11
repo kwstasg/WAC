@@ -5,4 +5,4 @@ Practically you can create any audio visualisation through Unreal Engine's BP sy
 
 Demo: https://www.dropbox.com/s/t0irs476zrjkwwf/WAC_Demo.rar?dl=0 (Now with VR Support)
 
-[linkname](https://www.youtube.com/watch?v=tyapMcqbpHk)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/tyapMcqbpHk/0.jpg)](https://www.youtube.com/watch?v=tyapMcqbpHk)
