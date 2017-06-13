@@ -15,7 +15,8 @@ Demo Project v4.15: [here](https://github.com/kwstasg/WAC/releases/download/WAC_
 
 Plugin v4.15: [here](https://github.com/kwstasg/WAC/releases/download/WAC_Plugin_Packaged_4.15/WAC_Plugin_Packaged_4.15.rar)
 
-Video: <br>
+Video:
+-------------
 [![Video](https://img.youtube.com/vi/tyapMcqbpHk/0.jpg)](https://www.youtube.com/watch?v=tyapMcqbpHk)
 
 
