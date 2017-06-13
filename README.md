@@ -20,6 +20,7 @@ Video: <br>
 
 
 Instructions:
+-------------
 1. Add WindowsAudioCapture inside Plugins folder in your project's folder ex. YOUR_PROJECT\Plugins\WindowsAudioCapture (if you dont have a Plugins folder feel free to crete one)
 2. Create an Actor BP
 3. Add a WindowsAudioCapture Component
@@ -30,5 +31,5 @@ Instructions:
 ![screenshot](https://p5.zdusercontent.com/attachment/374006/6SWd1erlARSx3IeDCFgjZhLBZ?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..S4SUMiqoz5mJOQw4AYBrDw.iLnxELpC8rxSyx4fWI41YVtuqVSqL9kp-1Gqp0aSoL8EX7mMEdmNWUkRWp39iZ-hfJLYDiIlMOCUAk-HwrVyr5hL4r57XSXDB0C5okelq8iIGnvOfXL585_-XAO19eThCISn6DTYKDBCNaJhanepGYIjp1JdRj5NPYdqboE_T684k43yR6ygqPcT8db35oDnB5auyS8-XxMl_dsP_6kULWGt_k569gMgHGA1kxOecOYGIybOlHcVExQihaM_s2_0DdxuAChjV6TGpsF8QOHD15U6MPI4-WUixlBF-zoMqs4.Oa9CaspSy9aRveiAyhsV9w)
 
 Special Thanx:
-
+-------------
 To [eXifreXi](https://github.com/eXifreXi) for his awesome plugin eXiSoundVis was a learning treasure to me, helped me to understand the appliance of FFT Algorithm on Audio Frequencies visit his repository here https://github.com/eXifreXi/eXiSoundVis
