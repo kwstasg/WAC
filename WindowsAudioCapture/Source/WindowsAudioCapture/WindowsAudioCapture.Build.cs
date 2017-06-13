@@ -55,14 +55,5 @@ public class WindowsAudioCapture : ModuleRules
 			}
 			);
 
-        if (Target.Platform == UnrealTargetPlatform.Win64 || Target.Platform == UnrealTargetPlatform.Win32)
-        {
-            if (WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2015)
-            {
-                PublicAdditionalLibraries.Add("legacy_stdio_definitions.lib");
-            }
-        }
-
-        AddEngineThirdPartyPrivateStaticDependencies(Target, "Kiss_FFT");
     }
 }

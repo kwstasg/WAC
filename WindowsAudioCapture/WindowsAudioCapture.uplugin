@@ -10,6 +10,7 @@
 	"DocsURL" : "",
 	"MarketplaceURL" : "",
 	"SupportURL" : "mailto:kwstasg@gmail.com",
+	"EngineVersion" : "4.16.0",
 	"CanContainContent" : false,
 	"IsBetaVersion" : false,
 	"Installed" : true,

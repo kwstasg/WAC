@@ -35,11 +35,6 @@ bool FAudioCaptureWorker::Init()
 	// Make sure the Worker is marked is not finished
 	bIsFinished = false;
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("**********************************")));
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("                 Plugin by KwstasG")));
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("             Windows Audio Capture")));
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("**********************************")));
-
 	return true;
 }
 
