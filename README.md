@@ -5,7 +5,8 @@ Practically you can create any audio visualisation through Unreal Engine's BP sy
 
 UE 4.16:
 -------------
-Plugin v4.16.1 (updated to VS2017): [here](https://github.com/kwstasg/WAC/releases/download/WAC_Plugin_Packaged_4.16/WAC_Plugin_Packaged_4.16.1.rar)
+Plugin v4.16.1 (updated to VS2017): [here](https://github.com/kwstasg/WAC/releases/download/WAC_Plugin_Packaged_4.16.1/WAC_Plugin_Packaged_4.16.1.rar)
+
 
 Plugin v4.16: [here](https://github.com/kwstasg/WAC/releases/download/WAC_Plugin_Packaged_4.16/WAC_Plugin_Packaged_4.16.rar)
 
