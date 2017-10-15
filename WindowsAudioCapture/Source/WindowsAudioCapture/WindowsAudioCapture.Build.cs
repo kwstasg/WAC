@@ -1,11 +1,13 @@
 using UnrealBuildTool;
 
+
 public class WindowsAudioCapture : ModuleRules
 {
-	public WindowsAudioCapture(TargetInfo Target)
+    public WindowsAudioCapture(ReadOnlyTargetRules Target) : base(Target)
 	{
-		
-		PublicIncludePaths.AddRange(
+       // PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+
+        PublicIncludePaths.AddRange(
 			new string[] {
 				"WindowsAudioCapture/Public"
 				// ... add public include paths required here ...

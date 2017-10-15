@@ -1,7 +1,7 @@
 {
-	"Changelist" : 3466753,
-	"CompatibleChangelist" : 3452394,
-	"BuildId" : "7370d9bf-5485-48ce-aacb-446748b048bc",
+	"Changelist" : 3658906,
+	"CompatibleChangelist" : 3573198,
+	"BuildId" : "7d5229ac-d3e2-4191-ac6f-9a43d8706aee",
 	"Modules" : 
 	{
 		"WindowsAudioCapture" : "UE4Editor-WindowsAudioCapture.dll"

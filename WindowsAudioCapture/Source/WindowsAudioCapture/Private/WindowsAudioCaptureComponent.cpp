@@ -36,7 +36,7 @@ void UWindowsAudioCaptureComponent::TickComponent(float DeltaTime, ELevelTick Ti
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-
+// This function will return an Array of Frequencies.
 TArray<float> UWindowsAudioCaptureComponent::BP_GetFrequencyArray(float inFreqLogBase, float inFreqMultiplier, float inFreqPower, float inFreqOffset)
 {
 	TArray<float> FrequencyArray;
@@ -49,7 +49,7 @@ TArray<float> UWindowsAudioCaptureComponent::BP_GetFrequencyArray(float inFreqLo
 	return FrequencyArray;
 }
 
-
+// This function will return the value of a specific frequency.
 void UWindowsAudioCaptureComponent::BP_GetSpecificFrequencyValue(TArray<float> InFrequencies, int32 InWantedFrequency, float& OutFrequencyValue)
 {
 	// Init the Return Value
@@ -64,14 +64,14 @@ void UWindowsAudioCaptureComponent::BP_GetSpecificFrequencyValue(TArray<float> I
 	}
 }
 
-
+// This function will return the average value for SubBass
 void UWindowsAudioCaptureComponent::BP_GetAverageSubBassValue(TArray<float> InFrequencies, float& OutAverageSubBass)
 {
 	BP_GetAverageFrequencyValueInRange(InFrequencies, 20, 60, OutAverageSubBass);
 }
 
 
-
+// This function will return the average value for Bass (60 to 250hz)
 void UWindowsAudioCaptureComponent::BP_GetAverageBassValue(TArray<float> InFrequencies,float& OutAverageBass)
 {
 	BP_GetAverageFrequencyValueInRange(InFrequencies, 60, 250, OutAverageBass);

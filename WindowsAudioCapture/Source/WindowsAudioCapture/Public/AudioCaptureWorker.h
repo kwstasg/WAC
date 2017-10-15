@@ -34,7 +34,8 @@ private:
 	// Counter for the ThreadNames
 	static int32 ThreadCounter;
 
-	void FAudioCaptureWorker::CalculateFrequencySpectrum
+	// Function to calculate the frequency spectrum
+	void CalculateFrequencySpectrum
 	(
 		int16* SamplePointer,
 		const int32 NumChannels,

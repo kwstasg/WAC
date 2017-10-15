@@ -14,9 +14,9 @@ public:
 	HRESULT RecordAudioStream(IAudioSink*, bool&);
 
 private:
-#define SAFE_RELEASE(punk)  \
-				  if ((punk) != NULL)  \
-					{ (punk)->Release(); (punk) = NULL; }
+//#define SAFE_RELEASE(punk)  \
+//				  if ((punk) != NULL)  \
+//					{ (punk)->Release(); (punk) = NULL; }
 
 	WAVEFORMATEX* m_pwfx					= NULL;
 	IAudioClient* m_pAudioClient			= NULL;
@@ -28,7 +28,7 @@ private:
 	REFERENCE_TIME m_hnsActualDuration;
 
 	const int m_refTimesPerMS	= 1000;
-	const int m_refTimesPerSec	= 1000;
+	const int m_refTimesPerSec	= 100000;
 
 	const CLSID m_CLSID_MMDeviceEnumerator	= __uuidof(MMDeviceEnumerator);
 	const IID m_IID_IMMDeviceEnumerator		= __uuidof(IMMDeviceEnumerator);

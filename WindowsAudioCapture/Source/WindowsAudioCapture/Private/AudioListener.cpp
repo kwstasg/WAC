@@ -1,9 +1,6 @@
 //Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
 #include "WindowsAudioCapture.h"
-#include <mmdeviceapi.h>
-#include <Audioclient.h>
 #include "AudioListener.h"
-#include "AudioSink.h"
 
 HRESULT ThrowOrExit(HRESULT hr)
 {
