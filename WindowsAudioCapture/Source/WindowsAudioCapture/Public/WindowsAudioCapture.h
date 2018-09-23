@@ -1,7 +1,8 @@
 //Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
 #pragma once
 
-#include "Engine.h"
+#include "CoreMinimal.h"
+//#include "Engine.h"
 #include "ModuleManager.h"
 
 class FWindowsAudioCaptureModule : public IModuleInterface

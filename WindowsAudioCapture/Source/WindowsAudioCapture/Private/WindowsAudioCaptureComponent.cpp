@@ -1,6 +1,6 @@
 //Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
-#include "WindowsAudioCapture.h"
 #include "WindowsAudioCaptureComponent.h"
+#include "WindowsAudioCapture.h"
 
 // Sets default values for this component's properties
 UWindowsAudioCaptureComponent::UWindowsAudioCaptureComponent()

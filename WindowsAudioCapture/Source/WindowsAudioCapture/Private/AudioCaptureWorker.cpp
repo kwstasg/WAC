@@ -1,6 +1,6 @@
 //Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
-#include "WindowsAudioCapture.h"
 #include "AudioCaptureWorker.h"
+#include "WindowsAudioCapture.h"
 
 FAudioCaptureWorker* FAudioCaptureWorker::Runnable = NULL;
 int32 FAudioCaptureWorker::ThreadCounter = 0;

@@ -1,5 +1,6 @@
 //Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
 #pragma once
+#define WIN32_LEAN_AND_MEAN
 
 #include <mmdeviceapi.h>
 #include <Audioclient.h>
@@ -28,7 +29,7 @@ private:
 	REFERENCE_TIME m_hnsActualDuration;
 
 	const int m_refTimesPerMS	= 1000;
-	const int m_refTimesPerSec	= 100000;
+	const int m_refTimesPerSec	= 1000;
 
 	const CLSID m_CLSID_MMDeviceEnumerator	= __uuidof(MMDeviceEnumerator);
 	const IID m_IID_IMMDeviceEnumerator		= __uuidof(IMMDeviceEnumerator);

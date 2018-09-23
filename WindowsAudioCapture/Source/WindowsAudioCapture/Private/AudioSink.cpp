@@ -1,6 +1,6 @@
 //Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
-#include "WindowsAudioCapture.h"
 #include "AudioSink.h"
+#include "WindowsAudioCapture.h"
 
 AudioSink::AudioSink()
 {
