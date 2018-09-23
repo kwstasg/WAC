@@ -9,6 +9,8 @@ Plugin v4.20.3 : [here](https://github.com/kwstasg/WAC/releases/download/4.20.3/
 
 Demo Project v4.20.3: [here](https://github.com/kwstasg/WAC/releases/download/4.20.3/WAC_Plugin_4.20.3.Demo.Project.rar) 
 
+Runtime Demo v4.20.3: [here](https://github.com/kwstasg/WAC/releases/download/4.20.3/WAC_Plugin_4.20.3_Runtime_Demo.rar) (Now with VR Support)
+
 UE 4.17:
 -------------
 Plugin v4.17.2 : [here](https://github.com/kwstasg/WAC/releases/download/WAC_Plugin_Packaged_4.17.2/WAC_Plugin_Packaged_4.17.2.rar)
