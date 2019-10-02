@@ -223,7 +223,10 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 					{
 						SamplePtr++;
 					}
-				
+					else
+					{
+						SamplePtr=0;
+					}
 				}
 			}
 
