@@ -1,5 +1,5 @@
 # WAC
-UE4 Visualization Plugin - Windows Audio Capture (WAC)
+Windows Audio Capture (WAC) - UE4 Visualization Plugin 
 
 An Unreal Engine 4 plugin that captures live audio from the windows default audio device and analyses it to output frequency values of currently playing audio.
 
