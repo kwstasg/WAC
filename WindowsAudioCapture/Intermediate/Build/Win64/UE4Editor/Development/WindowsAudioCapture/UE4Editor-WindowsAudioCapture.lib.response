@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-WindowsAudioCapture.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\DeSYF\OneDrive\Documents\Unreal Projects\UnrealAVS\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\DeSYF\OneDrive\Documents\Unreal Projects\UnrealAVS\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Module.WindowsAudioCapture.cpp.obj"
+"C:\Users\DeSYF\OneDrive\Documents\Unreal Projects\UnrealAVS\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Module.WindowsAudioCapture.gen.cpp.obj"
+"C:\Users\DeSYF\OneDrive\Documents\Unreal Projects\UnrealAVS\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\PCLaunch.rc.res"
+/OUT:"C:\Users\DeSYF\OneDrive\Documents\Unreal Projects\UnrealAVS\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\UE4Editor-WindowsAudioCapture.lib"
