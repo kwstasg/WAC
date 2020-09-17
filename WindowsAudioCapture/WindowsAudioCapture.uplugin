@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0.4.20",
+	"VersionName": "1.0.4.25",
 	"FriendlyName": "Windows Audio Capture",
 	"Description": "Captures live audio frequency values from the windows default playback device.",
 	"Category": "WAC",
@@ -10,7 +10,7 @@
 	"DocsURL": "https://github.com/kwstasg/WAC",
 	"MarketplaceURL": "",
 	"SupportURL": "mailto:kwstasg@gmail.com",
-	"EngineVersion": "4.20.0",
+	"EngineVersion": "4.25.0",
 	"CanContainContent": false,
 	"IsBetaVersion": false,
 	"Installed": false,

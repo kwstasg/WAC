@@ -2,10 +2,10 @@
 #include "AudioCaptureWorker.h"
 #include "WindowsAudioCapture.h"
 
-FAudioCaptureWorker* FAudioCaptureWorker::Runnable = NULL;
+FAudioCaptureWorker *FAudioCaptureWorker::Runnable = NULL;
 int32 FAudioCaptureWorker::ThreadCounter = 0;
 
-FAudioCaptureWorker::FAudioCaptureWorker() : m_sink(), m_listener(16, WAVE_FORMAT_PCM, 4, 0),Thread(NULL)
+FAudioCaptureWorker::FAudioCaptureWorker() : m_sink(), m_listener(16, WAVE_FORMAT_PCM, 4, 0), Thread(NULL)
 {
 	// Higher overall ThreadCounter to avoid duplicated names
 	FAudioCaptureWorker::ThreadCounter++;
@@ -22,13 +22,12 @@ FAudioCaptureWorker::~FAudioCaptureWorker()
 	Thread = NULL;
 }
 
-FAudioCaptureWorker* FAudioCaptureWorker::InitializeWorker()
+FAudioCaptureWorker *FAudioCaptureWorker::InitializeWorker()
 {
 	Runnable = new FAudioCaptureWorker();
 
 	return Runnable;
 }
-
 
 bool FAudioCaptureWorker::Init()
 {
@@ -37,7 +36,6 @@ bool FAudioCaptureWorker::Init()
 
 	return true;
 }
-
 
 uint32 FAudioCaptureWorker::Run()
 {
@@ -61,7 +59,6 @@ void FAudioCaptureWorker::ShutdownWorker()
 	}
 }
 
-
 void FAudioCaptureWorker::Exit()
 {
 	// Make sure to mark Thread as finished
@@ -74,18 +71,18 @@ void FAudioCaptureWorker::EnsureCompletion()
 	// Make sure to mark Thread as finished
 	bIsFinished = true;
 
-	if (Thread != NULL) {
+	if (Thread != NULL)
+	{
 
 		Thread->WaitForCompletion();
-	}		
+	}
 }
-
 
 TArray<float> FAudioCaptureWorker::GetFrequencyArray(float FreqLogBase, float FreqMultiplier, float FreqPower, float FreqOffset)
 {
 
-	TArray<float>	freqs;
-	AudioChunk		chunk;
+	TArray<float> freqs;
+	AudioChunk chunk;
 
 	if (m_sink.Dequeue(chunk))
 	{
@@ -99,7 +96,6 @@ TArray<float> FAudioCaptureWorker::GetFrequencyArray(float FreqLogBase, float Fr
 
 		//Empty chunk's trash
 		m_sink.EmptyQueue(chunk);
-
 	}
 
 	TArray<float> resultFloats;
@@ -120,7 +116,6 @@ TArray<float> FAudioCaptureWorker::GetFrequencyArray(float FreqLogBase, float Fr
 	return resultFloats;
 }
 
-
 float GetTheFFTInValue(const int16 InSampleValue, const int16 InSampleIndex, const int16 InSampleCount)
 {
 	float FFTValue = InSampleValue;
@@ -130,18 +125,15 @@ float GetTheFFTInValue(const int16 InSampleValue, const int16 InSampleIndex, con
 	return FFTValue;
 }
 
-
-void FAudioCaptureWorker::CalculateFrequencySpectrum
-(
-	int16* SamplePointer,
+void FAudioCaptureWorker::CalculateFrequencySpectrum(
+	int16 *SamplePointer,
 	const int32 NumChannels,
 	const int32 NumAvailableSamples,
 	float FreqLogBase,
 	float FreqMultiplier,
 	float FreqPower,
 	float FreqOffset,
-	TArray<float>& OutFrequencies
-)
+	TArray<float> &OutFrequencies)
 {
 	// Clear the Array before continuing
 	OutFrequencies.Empty();
@@ -163,7 +155,8 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 			// Actual amount of samples we gonna read
 			int32 SamplesToRead = LastSample - FirstSample;
 
-			if (SamplesToRead < 0) {
+			if (SamplesToRead < 0)
+			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("CalculateFrequencySpectrum: Number of SamplesToRead is < 0!")));
 				return;
 			}
@@ -171,7 +164,8 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 			//Shift the window enough so that we get a PowerOfTwo. FFT works better with that
 			int32 PoT = 2;
 
-			while (SamplesToRead > PoT) {
+			while (SamplesToRead > PoT)
+			{
 				PoT *= 2;
 			}
 
@@ -179,30 +173,30 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 			SamplesToRead = PoT;
 
 			// Create two 2-dim Arrays for complex numbers | Buffer and Output
-			kiss_fft_cpx* Buffer[2] = { 0 };
-			kiss_fft_cpx* Output[2] = { 0 };
+			kiss_fft_cpx *Buffer[2] = {0};
+			kiss_fft_cpx *Output[2] = {0};
 
 			// Create 1-dim Array with one slot for SamplesToRead
-			int32 Dims[1] = { SamplesToRead };
+			int32 Dims[1] = {SamplesToRead};
 
 			kiss_fftnd_cfg STF = kiss_fftnd_alloc(Dims, 1, 0, nullptr, nullptr);
 
-			int16* SamplePtr = SamplePointer;
-	
+			int16 *SamplePtr = SamplePointer;
+
 			// Allocate space in the Buffer and Output Arrays for all the data that FFT returns
 			for (int32 ChannelIndex = 0; ChannelIndex < NumChannels; ChannelIndex++)
 			{
-				Buffer[ChannelIndex] = (kiss_fft_cpx*)KISS_FFT_MALLOC(sizeof(kiss_fft_cpx) * SamplesToRead);
-				Output[ChannelIndex] = (kiss_fft_cpx*)KISS_FFT_MALLOC(sizeof(kiss_fft_cpx) * SamplesToRead);
+				Buffer[ChannelIndex] = (kiss_fft_cpx *)KISS_FFT_MALLOC(sizeof(kiss_fft_cpx) * SamplesToRead);
+				Output[ChannelIndex] = (kiss_fft_cpx *)KISS_FFT_MALLOC(sizeof(kiss_fft_cpx) * SamplesToRead);
 			}
 
 			// Shift our SamplePointer to the Current "FirstSample"
 			SamplePtr += FirstSample * NumChannels;
 
-			for (int32 SampleIndex = 0; SampleIndex < SamplesToRead ; SampleIndex++)
+			for (int32 SampleIndex = 0; SampleIndex < SamplesToRead; SampleIndex++)
 			{
-				
-				for (int32 ChannelIndex = 0; ChannelIndex < NumChannels ; ChannelIndex++)
+
+				for (int32 ChannelIndex = 0; ChannelIndex < NumChannels; ChannelIndex++)
 				{
 					// Make sure the Point is Valid and we don't go out of bounds
 					if (SamplePtr != NULL && SamplePtr != nullptr && (SampleIndex + FirstSample < SampleCount))
@@ -223,7 +217,10 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 					{
 						SamplePtr++;
 					}
-				
+					else
+					{
+						SamplePtr = 0;
+					}
 				}
 			}
 
@@ -252,8 +249,7 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 					}
 				}
 
-				OutFrequencies[SampleIndex] = FMath::Pow((FMath::LogX(FreqLogBase, ChannelSum / NumChannels) * FreqMultiplier),FreqPower) + FreqOffset;
-
+				OutFrequencies[SampleIndex] = FMath::Pow((FMath::LogX(FreqLogBase, ChannelSum / NumChannels) * FreqMultiplier), FreqPower) + FreqOffset;
 			}
 
 			// Make sure to free up the FFT stuff
@@ -265,11 +261,13 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 				KISS_FFT_FREE(Output[ChannelIndex]);
 			}
 		}
-		else {
+		else
+		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("InSoundVisData.PCMData is a nullptr!")));
 		}
 	}
-	else {
+	else
+	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Number of Channels is < 0!")));
 	}
 }

@@ -1,0 +1,16 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.WindowsAudioCapture.cpp.obj": [
+			"AudioCaptureWorker.cpp.obj",
+			"AudioListener.cpp.obj",
+			"AudioSink.cpp.obj",
+			"WindowsAudioCapture.cpp.obj",
+			"WindowsAudioCaptureComponent.cpp.obj"
+		],
+		"Module.WindowsAudioCapture.gen.cpp.obj": [
+			"WindowsAudioCapture.init.gen.cpp.obj",
+			"WindowsAudioCaptureComponent.gen.cpp.obj"
+		]
+	}
+}

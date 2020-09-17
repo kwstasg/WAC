@@ -1,4 +1,4 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright Epic Games, Inc. All Rights Reserved.
 /*===========================================================================
 	Generated code exported from UnrealHeaderTool.
 	DO NOT modify this manually! Edit the corresponding .h files instead!
@@ -18,10 +18,11 @@ void EmptyLinkFunctionForGeneratedCodeWindowsAudioCapture_init() {}
 		{
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/WindowsAudioCapture",
+				nullptr,
+				0,
 				PKG_CompiledIn | 0x00000000,
-				0xDEF98473,
-				0xB77BE248,
-				nullptr, 0,
+				0xD5FF7C09,
+				0xE2EE5B8E,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

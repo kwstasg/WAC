@@ -1,4 +1,5 @@
-/MANIFEST:NO
+/MANIFEST:EMBED
+/MANIFESTINPUT:"C:\Program Files\Epic Games\UE_4.25\Engine\Build\Windows\Resources\Default-Win64.manifest"
 /NOLOGO
 /DEBUG
 /errorReport:prompt
@@ -6,7 +7,7 @@
 /SUBSYSTEM:WINDOWS
 /FIXED:No
 /NXCOMPAT
-/STACK:5000000
+/STACK:12000000
 /DELAY:UNLOAD
 /DLL
 /PDBALTPATH:%_PDB%
@@ -16,11 +17,11 @@
 /ignore:4199
 /ignore:4099
 /DELAYLOAD:"d3d12.dll"
-/LIBPATH:"C:\Program Files\Epic Games\UE_4.20\Engine\Source\ThirdParty\Kiss_FFT\kiss_fft129\lib\x64\VS2015\Release"
-/LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\lib\x64"
-/LIBPATH:"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\lib\um\x64"
-/LIBPATH:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\ucrt\x64"
-/LIBPATH:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\um\x64"
+/DELAYLOAD:"DBGHELP.DLL"
+/LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x64"
+/LIBPATH:"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\lib\um\x64"
+/LIBPATH:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.17763.0\ucrt\x64"
+/LIBPATH:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.17763.0\um\x64"
 /NODEFAULTLIB:"LIBCMT"
 /NODEFAULTLIB:"LIBCPMT"
 /NODEFAULTLIB:"LIBCMTD"
@@ -31,10 +32,11 @@
 /NODEFAULTLIB:"LIBCP"
 /NODEFAULTLIB:"LIBCD"
 /NODEFAULTLIB:"LIBCPD"
-"E:\Unreal Projects\WAC_Plugin\Intermediate\Build\Win64\WAC_PluginEditor\Development\Engine\SharedPCH.Engine.h.obj"
-"E:\Unreal Projects\WAC_Plugin\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Module.WindowsAudioCapture.cpp.obj"
-"E:\Unreal Projects\WAC_Plugin\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Module.WindowsAudioCapture.gen.cpp.obj"
-"E:\Unreal Projects\WAC_Plugin\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\PCLaunch.rc.res"
+/FUNCTIONPADMIN
+"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Intermediate\Build\Win64\WAC_PluginEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Module.WindowsAudioCapture.cpp.obj"
+"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Module.WindowsAudioCapture.gen.cpp.obj"
+"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\Default.rc2.res"
 "delayimp.lib"
 "wininet.lib"
 "rpcrt4.lib"
@@ -59,13 +61,14 @@
 "setupapi.lib"
 "dwmapi.lib"
 "imm32.lib"
-"KissFFT.lib"
-"C:\Program Files\Epic Games\UE_4.20\Engine\Intermediate\Build\Win64\UE4Editor\Development\CoreUObject\UE4Editor-CoreUObject.lib"
-"C:\Program Files\Epic Games\UE_4.20\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\UE4Editor-Engine.lib"
-"C:\Program Files\Epic Games\UE_4.20\Engine\Intermediate\Build\Win64\UE4Editor\Development\Slate\UE4Editor-Slate.lib"
-"C:\Program Files\Epic Games\UE_4.20\Engine\Intermediate\Build\Win64\UE4Editor\Development\SlateCore\UE4Editor-SlateCore.lib"
-"C:\Program Files\Epic Games\UE_4.20\Engine\Intermediate\Build\Win64\UE4Editor\Development\Core\UE4Editor-Core.lib"
-/OUT:"E:\Unreal Projects\WAC_Plugin\Plugins\WindowsAudioCapture\Binaries\Win64\UE4Editor-WindowsAudioCapture.dll"
-/IMPLIB:"E:\Unreal Projects\WAC_Plugin\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\UE4Editor-WindowsAudioCapture.suppressed.lib"
-/PDB:"E:\Unreal Projects\WAC_Plugin\Plugins\WindowsAudioCapture\Binaries\Win64\UE4Editor-WindowsAudioCapture.pdb"
+"ThirdParty/Kiss_FFT/kiss_fft129/lib/x64/VS2015/Release/KissFFT.lib"
+"C:\Program Files\Epic Games\UE_4.25\Engine\Intermediate\Build\Win64\UE4Editor\Development\CoreUObject\UE4Editor-CoreUObject.lib"
+"C:\Program Files\Epic Games\UE_4.25\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\UE4Editor-Engine.lib"
+"C:\Program Files\Epic Games\UE_4.25\Engine\Intermediate\Build\Win64\UE4Editor\Development\Slate\UE4Editor-Slate.lib"
+"C:\Program Files\Epic Games\UE_4.25\Engine\Intermediate\Build\Win64\UE4Editor\Development\SlateCore\UE4Editor-SlateCore.lib"
+"C:\Program Files\Epic Games\UE_4.25\Engine\Intermediate\Build\Win64\UE4Editor\Development\Core\UE4Editor-Core.lib"
+/OUT:"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Plugins\WindowsAudioCapture\Binaries\Win64\UE4Editor-WindowsAudioCapture.dll"
+/IMPLIB:"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Plugins\WindowsAudioCapture\Intermediate\Build\Win64\UE4Editor\Development\WindowsAudioCapture\UE4Editor-WindowsAudioCapture.suppressed.lib"
+/PDB:"C:\Users\KostasG\Downloads\WAC_Plugin_4.20.3.Demo.Project\Plugins\WindowsAudioCapture\Binaries\Win64\UE4Editor-WindowsAudioCapture.pdb"
 /ignore:4078
+/INCLUDE:IMPLEMENT_MODULE_WindowsAudioCapture
