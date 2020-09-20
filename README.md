@@ -12,7 +12,7 @@ Color 2: Hue Shift Left/Right: Keboard keys 3/4
 
 Fixed "Highly Volatile Noise Pattern" Bug
 
-Demo Project v4.25.3: [here](https://github.com/kwstasg/WAC/releases/download/4.25.3/WAC_Plugin_4.25.3_Runtime_Demo.zip) 
+Runtime Demo v4.25.3: [here](https://github.com/kwstasg/WAC/releases/download/4.25.3/WAC_Plugin_4.25.3_Runtime_Demo.zip) 
 
 UE 4.20:
 -------------
