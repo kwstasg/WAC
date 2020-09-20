@@ -3,6 +3,17 @@ UE4 Visualization Plugin - Windows Audio Capture (WAC) is an Unreal Engine 4 plu
 
 Practically you can create any audio visualisation through Unreal Engine's BP system by adding custom nodes that react live with your windows audio.
 
+UE 4.25:
+-------------
+Updated to latest UE 4.25.3 release, added Shift Colors Hue Functionality
+
+Color 1: Hue Shift Left/Right: Keboard keys 1/2
+Color 2: Hue Shift Left/Right: Keboard keys 3/4
+
+Fixed "Highly Volatile Noise Pattern" Bug
+
+Demo Project v4.25.3: [here](https://github.com/kwstasg/WAC/releases/download/4.25.3/WAC_Plugin_4.25.3_Runtime_Demo.zip) 
+
 UE 4.20:
 -------------
 Plugin v4.20.3 : [here](https://github.com/kwstasg/WAC/releases/download/4.20.3/WAC_Plugin_4.20.3.rar)
