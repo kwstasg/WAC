@@ -14,6 +14,8 @@ Fixed "Highly Volatile Noise Pattern" Bug
 
 Runtime Demo v4.25.3: [here](https://github.com/kwstasg/WAC/releases/download/4.25.3/WAC_Plugin_4.25.3_Runtime_Demo.zip) 
 
+Runtime Demo v4.25.3: [here](https://github.com/kwstasg/WAC/releases/download/4.25.3/WAC_Plugin_4.25.3_Runtime_DemoVR.zip) (with VR Support)
+
 UE 4.20:
 -------------
 Plugin v4.20.3 : [here](https://github.com/kwstasg/WAC/releases/download/4.20.3/WAC_Plugin_4.20.3.rar)
