@@ -3,21 +3,18 @@ using UnrealBuildTool;
 public class WindowsAudioCapture : ModuleRules
 {
 	public WindowsAudioCapture(ReadOnlyTargetRules Target) : base(Target)
-    {
-
+	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-
+		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				//"WindowsAudioCapture/Public"
 				// ... add public include paths required here ...
 			}
 			);
 				
-
+		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				//"WindowsAudioCapture/Private",
 				// ... add other private include paths required here ...
 			}
 			);
@@ -26,14 +23,8 @@ public class WindowsAudioCapture : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-                "Core",
-                //"ApplicationCore",
-                //"CoreUObject",
-                //"Engine",
-                //"InputCore",
-                //"RenderCore",
-                //"ShaderCore",
-                "Kiss_FFT",
+				"Core",
+				"Kiss_FFT",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -42,10 +33,10 @@ public class WindowsAudioCapture : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-                "CoreUObject",
-                "Engine",
-                "Slate",
-                "SlateCore",
+				"CoreUObject",
+				"Engine",
+				"Slate",
+				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
@@ -57,6 +48,5 @@ public class WindowsAudioCapture : ModuleRules
 				// ... add any modules that your module loads dynamically here ...
 			}
 			);
-
-    }
+	}
 }

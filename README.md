@@ -3,6 +3,12 @@ UE4 Visualization Plugin - Windows Audio Capture (WAC) is an Unreal Engine 4 plu
 
 Practically you can create any audio visualisation through Unreal Engine's BP system by adding custom nodes that react live with your windows audio.
 
+
+UE 5.4.3 (25/7/2024):
+-------------
+Updated to latest UE 5.4.3
+
+
 UE 4.25:
 -------------
 Updated to latest UE 4.25.3 release, added Shift Colors Hue Functionality
@@ -57,6 +63,4 @@ Instructions:
 5. Analyse Frequency Array as you preffer there are 4 functions so far to assist you Get Specific Freq Value, Get Average Freq Value in Range, Get Average Bass Value , Get Average Subbass Value
 6. Use the output value to move/rescale other actors or adjust light brightnes or color...let your fantasy guide you
 
-Special Thanx:
--------------
-To [eXifreXi](https://github.com/eXifreXi) for his awesome plugin eXiSoundVis was a learning treasure to me, helped me to understand the appliance of FFT Algorithm on Audio Frequencies visit his repository here https://github.com/eXifreXi/eXiSoundVis
+
