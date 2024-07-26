@@ -10,7 +10,7 @@ Updated to latest UE 5.4.3
 
 Plugin v5.4.3 : [here](https://github.com/kwstasg/WAC/releases/download/5.4.3/WindowsAudioCapture.zip)
 
-Runtime Demo v5.4.3: [here](https://github.com/kwstasg/WAC/releases/download/5.4.3/WAC_Plugin_.5.4.3.Demo.Project.zip)
+Demo Project v5.4.3: [here](https://github.com/kwstasg/WAC/releases/download/5.4.3/WAC_Plugin_.5.4.3.Demo.Project.zip)
 
 
 UE 4.25:
