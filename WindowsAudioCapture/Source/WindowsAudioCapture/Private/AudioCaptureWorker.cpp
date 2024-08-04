@@ -1,138 +1,162 @@
-//Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
+// Windows Audio Capture (WAC) by KwstasG (Kostas Giannakakis)
 #include "AudioCaptureWorker.h"
 #include "WindowsAudioCapture.h"
 #include "HAL/PlatformProcess.h"
 #include "Misc/OutputDeviceDebug.h"
+#include <memory>
+#include <mutex>
 
-FAudioCaptureWorker* FAudioCaptureWorker::Runnable = NULL;
-int32 FAudioCaptureWorker::ThreadCounter = 0;
+std::unique_ptr<FAudioCaptureWorker> FAudioCaptureWorker::Runnable = NULL;
+std::atomic<int32> FAudioCaptureWorker::ThreadCounter(0);
+std::mutex FAudioCaptureWorker::workerMutex;
 
-FAudioCaptureWorker::FAudioCaptureWorker() : m_sink(), m_listener(16, WAVE_FORMAT_PCM, 4, 0),Thread(NULL)
+FAudioCaptureWorker::FAudioCaptureWorker()
+    : m_listener(16, WAVE_FORMAT_PCM, 4, 0)
+    , m_sink()
+    , bIsFinished(false)
+    , Thread(NULL)
 {
     // Higher overall ThreadCounter to avoid duplicated names
     FAudioCaptureWorker::ThreadCounter++;
 
-    Thread = FRunnableThread::Create(this, *FString::Printf(TEXT("FAudioCaptureWorker%d"), FAudioCaptureWorker::ThreadCounter), 0, EThreadPriority::TPri_Normal);
+    Thread = FRunnableThread::Create(this, *FString::Printf(TEXT("FAudioCaptureWorker%d"), FAudioCaptureWorker::ThreadCounter.load()), 0, EThreadPriority::TPri_Normal);
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker created with thread ID: %d"), Thread->GetThreadID());
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("Failed to create FAudioCaptureWorker thread"));
+    }
 }
 
 FAudioCaptureWorker::~FAudioCaptureWorker()
 {
-    // Make sure to mark Thread as finished
+    // Ensure to mark Thread as finished
     bIsFinished = true;
 
-    delete Thread;
-    Thread = NULL;
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker thread ID: %d is being destroyed"), Thread->GetThreadID());
+        delete Thread;
+        Thread = NULL;
+    }
+    UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker destroyed."));
 }
 
 FAudioCaptureWorker* FAudioCaptureWorker::InitializeWorker()
 {
-    Runnable = new FAudioCaptureWorker();
-
-    return Runnable;
+    std::lock_guard<std::mutex> lock(workerMutex);
+    if (!Runnable)
+    {
+        Runnable = std::make_unique<FAudioCaptureWorker>();
+    }
+    UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker initialized."));
+    return Runnable.get();
 }
 
 bool FAudioCaptureWorker::Init()
 {
-    // Make sure the Worker is marked is not finished
+    // Mark Worker as not finished
     bIsFinished = false;
-
+    UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker initialized successfully."));
     return true;
 }
 
 uint32 FAudioCaptureWorker::Run()
 {
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker thread ID: %d started running."), Thread->GetThreadID());
+    }
     m_listener.RecordAudioStream(&m_sink, bIsFinished);
-
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker thread ID: %d stopped running."), Thread->GetThreadID());
+    }
     return 0;
 }
 
 void FAudioCaptureWorker::Stop()
 {
     StopTaskCounter.Increment();
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker thread ID: %d stop requested."), Thread->GetThreadID());
+    }
 }
 
 void FAudioCaptureWorker::ShutdownWorker()
 {
+    std::lock_guard<std::mutex> lock(workerMutex);
     if (Runnable)
     {
         Runnable->EnsureCompletion();
-        delete Runnable;
-        Runnable = NULL;
+        Runnable.reset();
     }
+    UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker shut down."));
 }
 
 void FAudioCaptureWorker::Exit()
 {
-    // Make sure to mark Thread as finished
+    // Mark Thread as finished
     bIsFinished = true;
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker thread ID: %d exited."), Thread->GetThreadID());
+    }
 }
 
 void FAudioCaptureWorker::EnsureCompletion()
 {
     Stop();
-    // Make sure to mark Thread as finished
+    // Mark Thread as finished
     bIsFinished = true;
 
-    if (Thread != NULL)
+    if (Thread)
     {
         Thread->WaitForCompletion();
-    }        
+    }
+    if (Thread)
+    {
+        UE_LOG(LogTemp, Log, TEXT("FAudioCaptureWorker thread ID: %d ensured completion."), Thread->GetThreadID());
+    }
 }
 
-TArray<float> FAudioCaptureWorker::GetFrequencyArray(float FreqLogBase, float FreqMultiplier, float FreqPower, float FreqOffset)
+void FAudioCaptureWorker::GetFrequencyArray(float FreqLogBase, float FreqMultiplier, float FreqPower, float FreqOffset, TArray<float>& OutFrequencies, TArray<float>& OutLeftChannelFrequencies, TArray<float>& OutRightChannelFrequencies)
 {
     TArray<float> freqs;
+    TArray<float> leftChannelFreqs;
+    TArray<float> rightChannelFreqs;
     AudioChunk chunk;
 
     if (!m_sink.Dequeue(chunk))
     {
-        // Log that no audio chunk is available
         // UE_LOG(LogTemp, Warning, TEXT("No audio chunk available."));
-        return freqs;
+        return;
     }
 
-    if (chunk.size <= 0 || chunk.chunk == nullptr)
+    if (chunk.size <= 0 || chunk.chunk == NULL)
     {
-        // Log invalid chunk size or data
         UE_LOG(LogTemp, Warning, TEXT("Invalid audio chunk: size=%d"), chunk.size);
-        return freqs;
+        return;
     }
 
     // Calculate Frequency Values
-    CalculateFrequencySpectrum(chunk.chunk, 2, chunk.size, FreqLogBase, FreqMultiplier, FreqPower, FreqOffset, freqs);
+    CalculateFrequencySpectrum(chunk.chunk, 2, chunk.size, FreqLogBase, FreqMultiplier, FreqPower, FreqOffset, OutFrequencies, OutLeftChannelFrequencies, OutRightChannelFrequencies);
 
-    // Empty chunk's trash
-    m_sink.EmptyQueue(chunk);
-
-    TArray<float> resultFloats;
-    float count = freqs.Num() / 2 - 1;
-
-    resultFloats.Reserve(count);
-
-    for (float i = 1; i < freqs.Num() / 2; i++)
-    {
-        if (freqs[i] < 0)
-        {
-            freqs[i] = 0;
-        }
-
-        resultFloats.Add(freqs[i]);
-    }
-
-    return resultFloats;
+    // Empty the queue
+    m_sink.EmptyQueue();
 }
 
 float GetTheFFTInValue(const int16 InSampleValue, const int16 InSampleIndex, const int16 InSampleCount)
 {
     float FFTValue = InSampleValue;
-
     FFTValue *= 0.5f * (1 - FMath::Cos(2 * PI * InSampleIndex / (InSampleCount - 1)));
-
     return FFTValue;
 }
 
-void FAudioCaptureWorker::CalculateFrequencySpectrum
-(
+void FAudioCaptureWorker::CalculateFrequencySpectrum(
     int16* SamplePointer,
     const int32 NumChannels,
     const int32 NumAvailableSamples,
@@ -140,11 +164,14 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
     float FreqMultiplier,
     float FreqPower,
     float FreqOffset,
-    TArray<float>& OutFrequencies
-)
+    TArray<float>& OutFrequencies,
+    TArray<float>& OutLeftChannelFrequencies,
+    TArray<float>& OutRightChannelFrequencies)
 {
-    // Clear the Array before continuing
+    // Clear the Arrays before continuing
     OutFrequencies.Empty();
+    OutLeftChannelFrequencies.Empty();
+    OutRightChannelFrequencies.Empty();
 
     // Make sure the Number of Channels is correct
     if (NumChannels <= 0 || NumChannels > 2)
@@ -154,7 +181,7 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
     }
 
     // Check if we actually have a Buffer to work with
-    if (SamplePointer == nullptr)
+    if (SamplePointer == NULL)
     {
         UE_LOG(LogTemp, Warning, TEXT("SamplePointer is null"));
         return;
@@ -178,7 +205,6 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
 
     // Shift the window enough so that we get a PowerOfTwo. FFT works better with that
     int32 PoT = 2;
-
     while (SamplesToRead > PoT)
     {
         PoT *= 2;
@@ -187,22 +213,22 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
     // Now we have a good PowerOfTwo to work with
     SamplesToRead = PoT;
 
-    // Create two 2-dim Arrays for complex numbers | Buffer and Output
-    kiss_fft_cpx* Buffer[2] = { 0 };
-    kiss_fft_cpx* Output[2] = { 0 };
+    // Create unique pointers for complex numbers | Buffer and Output
+    std::unique_ptr<kiss_fft_cpx[]> Buffer[2] = { NULL };
+    std::unique_ptr<kiss_fft_cpx[]> Output[2] = { NULL };
 
     // Create 1-dim Array with one slot for SamplesToRead
     int32 Dims[1] = { SamplesToRead };
 
-    kiss_fftnd_cfg STF = kiss_fftnd_alloc(Dims, 1, 0, nullptr, nullptr);
+    kiss_fftnd_cfg STF = kiss_fftnd_alloc(Dims, 1, 0, NULL, NULL);
 
     int16* SamplePtr = SamplePointer;
 
     // Allocate space in the Buffer and Output Arrays for all the data that FFT returns
     for (int32 ChannelIndex = 0; ChannelIndex < NumChannels; ChannelIndex++)
     {
-        Buffer[ChannelIndex] = (kiss_fft_cpx*)KISS_FFT_MALLOC(sizeof(kiss_fft_cpx) * SamplesToRead);
-        Output[ChannelIndex] = (kiss_fft_cpx*)KISS_FFT_MALLOC(sizeof(kiss_fft_cpx) * SamplesToRead);
+        Buffer[ChannelIndex].reset(new kiss_fft_cpx[SamplesToRead]);
+        Output[ChannelIndex].reset(new kiss_fft_cpx[SamplesToRead]);
     }
 
     // Shift our SamplePointer to the Current "FirstSample"
@@ -239,34 +265,67 @@ void FAudioCaptureWorker::CalculateFrequencySpectrum
     {
         if (Buffer[ChannelIndex])
         {
-            kiss_fftnd(STF, Buffer[ChannelIndex], Output[ChannelIndex]);
+            kiss_fftnd(STF, Buffer[ChannelIndex].get(), Output[ChannelIndex].get());
         }
     }
 
-    OutFrequencies.AddZeroed(SamplesToRead);
+    OutFrequencies.AddZeroed(SamplesToRead / 2);
+    OutLeftChannelFrequencies.AddZeroed(SamplesToRead / 2);
+    OutRightChannelFrequencies.AddZeroed(SamplesToRead / 2);
 
-    for (int32 SampleIndex = 0; SampleIndex < SamplesToRead; ++SampleIndex)
+    for (int32 SampleIndex = 0; SampleIndex < SamplesToRead / 2; ++SampleIndex)
     {
         double ChannelSum = 0.0f;
+        double LeftChannelSum = 0.0f;
+        double RightChannelSum = 0.0f;
 
         for (int32 ChannelIndex = 0; ChannelIndex < NumChannels; ++ChannelIndex)
         {
             if (Output[ChannelIndex])
             {
-                // With this we get the actual Frequency value for the frequencies from 0hz to ~22000hz
-                ChannelSum += FMath::Sqrt(FMath::Square(Output[ChannelIndex][SampleIndex].r) + FMath::Square(Output[ChannelIndex][SampleIndex].i));
+                double Magnitude = FMath::Sqrt(FMath::Square(Output[ChannelIndex][SampleIndex].r) + FMath::Square(Output[ChannelIndex][SampleIndex].i));
+                ChannelSum += Magnitude;
+
+                if (ChannelIndex == 0)
+                {
+                    LeftChannelSum += Magnitude;
+                }
+                else if (ChannelIndex == 1)
+                {
+                    RightChannelSum += Magnitude;
+                }
             }
         }
 
-        OutFrequencies[SampleIndex] = FMath::Pow((FMath::LogX(FreqLogBase, ChannelSum / NumChannels) * FreqMultiplier), FreqPower) + FreqOffset;
+        // Average the ChannelSum across channels and normalize
+        ChannelSum /= NumChannels;
+
+        // Apply a compensation factor to counteract the roll-off
+        ChannelSum *= (1.0f + SampleIndex / float(SamplesToRead / 2));
+
+        // Logarithmic scaling (if needed)
+        OutFrequencies[SampleIndex] = FMath::Pow((FMath::LogX(FreqLogBase, ChannelSum) * FreqMultiplier), FreqPower) + FreqOffset;
+        
+        // Zero-out channels with no audio
+        if (LeftChannelSum == 0.0f)
+        {
+            OutLeftChannelFrequencies[SampleIndex] = 0.0f;
+        }
+        else
+        {
+            OutLeftChannelFrequencies[SampleIndex] = FMath::Pow((FMath::LogX(FreqLogBase, LeftChannelSum) * FreqMultiplier), FreqPower) + FreqOffset;
+        }
+
+        if (RightChannelSum == 0.0f)
+        {
+            OutRightChannelFrequencies[SampleIndex] = 0.0f;
+        }
+        else
+        {
+            OutRightChannelFrequencies[SampleIndex] = FMath::Pow((FMath::LogX(FreqLogBase, RightChannelSum) * FreqMultiplier), FreqPower) + FreqOffset;
+        }
     }
 
-    // Make sure to free up the FFT stuff
-    KISS_FFT_FREE(STF);
-
-    for (int32 ChannelIndex = 0; ChannelIndex < NumChannels; ++ChannelIndex)
-    {
-        KISS_FFT_FREE(Buffer[ChannelIndex]);
-        KISS_FFT_FREE(Output[ChannelIndex]);
-    }
+    // Free up the FFT stuff
+    kiss_fft_free(STF);
 }
