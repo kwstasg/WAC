@@ -3,6 +3,22 @@ UE5 Visualization Plugin - Windows Audio Capture (WAC) is an Unreal Engine 5 plu
 
 Practically you can create any audio visualisation through Unreal Engine's BP system by adding custom nodes that react live with your windows audio.
 
+UE 5.4.3b (4/8/2024):
+-------------
+New Release 5.4.3b enhanced for stability and performance
+
+introducing new features:
+-Extra outputs for Left and Rigth Channel Separation
+-Extra output in dB
+-Interpolation for smoother visualisations
+-Dynamic Range Compression in order to boost more silent frequencies
+-Normalization in order to set custom range of the output
+
+Plugin v5.4.3b : [here](https://github.com/kwstasg/WAC/releases/download/5.4.3b/WindowsAudioCapture.zip)
+
+Demo Project v5.4.3b: [here](https://github.com/kwstasg/WAC/releases/download/5.4.3b/WAC_Plugin_5.4.3b.Demo.Project.zip)
+
+Runtime Demo v5.4.3b: [here](https://github.com/kwstasg/WAC/releases/download/5.4.3b/WAC.Plugin.5_4_3b.Runtime.zip)
 
 UE 5.4.3 (25/7/2024):
 -------------
