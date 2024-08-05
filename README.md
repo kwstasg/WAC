@@ -21,7 +21,7 @@ Demo Project v5.4.3b: [here](https://github.com/kwstasg/WAC/releases/download/5.
 Runtime Demo v5.4.3b: [here](https://github.com/kwstasg/WAC/releases/download/5.4.3b/WAC.Plugin.5_4_3b.Runtime.zip)
 
 
-[![Video](https://i.ytimg.com/an_webp/zEFxnGkhoZI/mqdefault_6s.webp?du=3000&sqp=CMTmvbUG&rs=AOn4CLCgnzsmcpGRwj9JfjCqOxQHAzrRjA)](https://www.youtube.com/watch?v=zEFxnGkhoZI)
+[![Video](https://i9.ytimg.com/vi_webp/zEFxnGkhoZI/mqdefault.webp?v=66af8389&sqp=COSmwrUG&rs=AOn4CLCVPgLxJ7DegoVVbyluEtLzwabX0w)](https://www.youtube.com/watch?v=zEFxnGkhoZI)
 
 UE 5.4.3 (25/7/2024):
 -------------
